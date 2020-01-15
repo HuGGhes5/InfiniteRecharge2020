@@ -5,15 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ExtendClimber.h"
-#include "subsystems/Climber.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
-ExtendClimber::ExtendClimber(Climber* subsystem) : climb{subsystem} {
+#include "commands/Shoot.h"
+
+Shoot::Shoot(Shooter* subsystem) : shoot{subsystem} {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({subsystem});
 }
 
-// Called repeatedly when this Command is scheduled to run
-void ExtendClimber::Initialize() {climb->ExtendClimber();}
+// Called when the command is initially scheduled.
+void Shoot::Execute() {
+  shoot->SetBottomMotorSpeed(frc::SmartDashboard::GetNumber("Bottom Motor RPM", 0.0));
+  shoot->SetTopMotorSpeed(frc::SmartDashboard::GetNumber("Top Motor RPM", 0.0));
+}
 
-void ExtendClimber::End(bool interrupted) {climb->StopClimber();}
+// Returns true when the command should end.
+// bool Shoot::IsFinished() { return true; }
+void Shoot::End(bool interupted) {
+  shoot->SetBottomMotorSpeed(0.0);
+  shoot->SetTopMotorSpeed(0.0);
+}

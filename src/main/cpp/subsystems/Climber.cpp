@@ -5,15 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ExtendClimber.h"
 #include "subsystems/Climber.h"
 
-ExtendClimber::ExtendClimber(Climber* subsystem) : climb{subsystem} {
-  // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements({subsystem});
+Climber::Climber() {}
+
+// This method will be called once per scheduler run
+void Climber::Periodic() {}
+
+void Climber::ExtendClimber() {
+    climb_motor.Set(0.3);
 }
 
-// Called repeatedly when this Command is scheduled to run
-void ExtendClimber::Initialize() {climb->ExtendClimber();}
+void Climber::RetractClimber() {
+    climb_motor.Set(-1);
+}
 
-void ExtendClimber::End(bool interrupted) {climb->StopClimber();}
+void Climber::StopClimber() {
+    climb_motor.Set(0.0);
+}

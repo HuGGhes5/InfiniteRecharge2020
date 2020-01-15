@@ -24,10 +24,50 @@ namespace ConAuto {
     constexpr double AutoDriveSpeed = 0.5; 
 }
 
-namespace ConCANBus {
+namespace ConClimber {
+    //Motors
+    constexpr int CLIMB_MOTOR = 6;
+}
+
+namespace ConDrivetrain {
+    //Motors
     constexpr int RIGHT_MOTOR = 4;
     constexpr int LEFT_MOTOR = 5;
-    constexpr int CLIMB_MOTOR = 6;
+}
+
+namespace ConMath {
+    constexpr double PI = 3.141592;
+    constexpr double METERS_2_INCH = .0254; // m/in
+    constexpr double MINUTES_2_SECONDS = 1/60.; // sec/min
+}
+
+namespace ConNEO {
+    constexpr int MAXIMUM_RPM = 5676;
+    constexpr int GEAR_RATIO = 10.71;
+}
+
+namespace ConShooter {
+    constexpr int DEAULT_SPEED = 4000; //RPM
+    namespace Top {
+        constexpr int MOTOR = 0;
+        constexpr int WHEEL_SIZE = 4; //in inches
+        constexpr double VELOCITY_FACTOR = 1; //(ConMath::PI*WHEEL_SIZE) * ConMath::METERS_2_INCH * ConMath::MINUTES_2_SECONDS; //(velocity) y [m/s] = PI*WHEEL_SIZE * m/in * 1/60 * x [RPM]
+        //PID gains
+        constexpr double P = 2e-4;
+        constexpr double I = 0.0;
+        constexpr double D = 2e-3;
+        constexpr double FF = 1.7e-4;
+    }
+    namespace Bottom {
+        constexpr int MOTOR = 1;
+        constexpr int WHEEL_SIZE = 6; //in inches
+        constexpr double VELOCITY_FACTOR = 1; //(ConMath::PI*WHEEL_SIZE) * ConMath::METERS_2_INCH * ConMath::MINUTES_2_SECONDS; //(velocity) y [m/s] = PI*WHEEL_SIZE * m/in * 1/60 * x [RPM]
+        //PID gains
+        constexpr double P = 2e-4;
+        constexpr double I = 0.0;
+        constexpr double D = 2e-3;
+        constexpr double FF = 1.7e-4;
+    }
 }
 
 namespace ConXBOXController {
@@ -52,7 +92,7 @@ namespace ConXBOXController {
 
     //CREATE A WIDGEt FOR THESE TO CHANGE
     //Dead zone
-    constexpr double DEAD_ZONE = 0.015; //approximate value
+    constexpr double DEAD_ZONE = 0.5; //approximate value
     //Driver controller Port
     constexpr int DRIVER_CONTROLLER_PORT = 0;
 }

@@ -5,21 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/ClimbMech.h"
+#include "commands/LogDataToDashboard.h"
 
-ClimbMech::ClimbMech() {}
-
-// This method will be called once per scheduler run
-void ClimbMech::Periodic() {}
-
-void ClimbMech::ExtendClimber() {
-    climb_motor.Set(0.3);
+LogDataToDashboard::LogDataToDashboard(Shooter* subsystem) : shoot{subsystem} {
+  // Use addRequirements() here to declare subsystem dependencies.
 }
 
-void ClimbMech::RetractClimber() {
-    climb_motor.Set(-0.3);
-}
-
-void ClimbMech::StopClimber() {
-    climb_motor.Set(0.0);
+// Called repeatedly when this Command is scheduled to run
+void LogDataToDashboard::Execute() {
+    frc::SmartDashboard::PutNumber("Top Motor Speed", shoot->GetTopMotorSpeed());
+    frc::SmartDashboard::PutNumber("Bottom Motor Speed", shoot->GetBottomMotorSpeed());
 }

@@ -9,13 +9,12 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <ctre/Phoenix.h>
-#include <rev/CANSparkMax.h>
 
 #include "Constants.h"
 
-class ClimbMech : public frc2::SubsystemBase {
+class Climber : public frc2::SubsystemBase {
  public:
-  ClimbMech();
+  Climber();
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.
@@ -31,6 +30,5 @@ class ClimbMech : public frc2::SubsystemBase {
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
-   rev::CANSparkMax climb_motor{ConCANBus::LEFT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
- // WPI_TalonSRX climb_motor{ConCANBus::CLIMB_MOTOR};
+  WPI_TalonSRX climb_motor{ConClimber::CLIMB_MOTOR};
 };

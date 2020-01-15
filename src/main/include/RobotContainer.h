@@ -16,9 +16,11 @@
 #include "commands/ExtendClimber.h"
 #include "commands/HalfSpeedDrive.h"
 #include "commands/RetractClimber.h"
+#include "commands/Shoot.h"
 #include "Constants.h"
 #include "subsystems/Drivetrain.h"
-#include "subsystems/ClimbMech.h"
+#include "subsystems/Climber.h"
+#include "subsystems/Shooter.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -38,7 +40,8 @@ class RobotContainer {
  
  // The robot's subsystems
   Drivetrain drive;
-  ClimbMech climb_motor;
+  Climber climb;
+  Shooter shoot;
 
   // The autonomous routines
   DriveDistance simple_auto{ConAuto::AutoDriveDistanceInches,

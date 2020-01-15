@@ -42,8 +42,8 @@ class Drivetrain : public frc2::SubsystemBase {
   // for methods that implement subsystem capabilities
 
     // Neo motor controllers
-  rev::CANSparkMax right{ConCANBus::RIGHT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
-  rev::CANSparkMax left{ConCANBus::LEFT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax right{ConDrivetrain::RIGHT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax left{ConDrivetrain::LEFT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
 
   // Drive encoders
   rev::CANEncoder right_encoder = right.GetEncoder();
@@ -54,7 +54,5 @@ class Drivetrain : public frc2::SubsystemBase {
 
   // Dead zone correction for Xbox controllers
   double DeadZoneCorrection(double axis_value);
-
-
 
 };

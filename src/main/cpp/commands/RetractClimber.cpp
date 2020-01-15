@@ -6,18 +6,14 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/RetractClimber.h"
-#include "subsystems/ClimbMech.h"
+#include "subsystems/Climber.h"
 
-RetractClimber::RetractClimber(ClimbMech* subsystem) : climb_motor{subsystem} {
+RetractClimber::RetractClimber(Climber* subsystem) : climb{subsystem} {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({subsystem});
 }
 
 // Called repeatedly when this Command is scheduled to run
-void RetractClimber::Initialize() {}
+void RetractClimber::Initialize() {climb->RetractClimber();}
 
-void RetractClimber::Execute() {climb_motor->RetractClimber();}
-
-bool RetractClimber::IsFinished() {return false;}
-
-void RetractClimber::End(bool interrupted) {climb_motor->StopClimber();}
+void RetractClimber::End(bool interrupted) {climb->StopClimber();}

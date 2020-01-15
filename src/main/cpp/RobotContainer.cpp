@@ -6,18 +6,24 @@
 /*----------------------------------------------------------------------------*/
 
 #include <frc2/command/button/JoystickButton.h>
+#include <frc2/command/button/Button.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 #include "commands/DefaultDrive.h"
 #include "commands/ExtendClimber.h"
+#include "commands/LogDataToDashboard.h"
 #include "commands/HalfSpeedDrive.h"
 #include "commands/RetractClimber.h"
+#include "commands/Shoot.h"
 
 #include "RobotContainer.h"
 
 RobotContainer::RobotContainer() {
   // Initialize all of your commands and subsystems here
   
+  frc::SmartDashboard::PutNumber("Top Motor RPM", 0.0);
+  frc::SmartDashboard::PutNumber("Bottom Motor RPM", 0.0);
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -28,22 +34,32 @@ RobotContainer::RobotContainer() {
        [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_TRIGGER_ID) - driver_controller.GetRawAxis(ConXBOXController::LEFT_TRIGGER_ID); },
        [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_JOYSTICK_X); }));
 
-  
+
 }
 
 void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
 
   // Commence Half Speed driving when RB is pressed
-  frc2::JoystickButton(&driver_controller, ConXBOXController::RIGHT_BUMPER)
-      .WhenHeld(new HalfSpeedDrive(&drive));
+  frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::RIGHT_BUMPER); }).WhenHeld(new HalfSpeedDrive(&drive));
+  // frc2::JoystickButton(&driver_controller, ConXBOXController::RIGHT_BUMPER)
+  //     .WhenHeld(new HalfSpeedDrive(&drive));
 
   // Extend Climber when 'A' button is held.
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::A); }).WhenHeld(new ExtendClimber(&climb));
   // frc2::JoystickButton(&driverController, ConXBOXController::A)
-  //     .WhileHeld(new ExtendClimber(&climb_motor));
+  //     .WhileHeld(new ExtendClimber(&climb));
+
   // Retract Climber when 'B' button is held.
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::B); }).WhenHeld(new RetractClimber(&climb));
   // frc2::JoystickButton(&driverController, ConXBOXController::B)
-  //     .WhileHeld(new RetractClimber(&climb_motor));
+  //     .WhileHeld(new RetractClimber(&climb));
+
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::X); }).WhileHeld(new Shoot(&shoot));
+  // frc2::JoystickButton(&driverController, ConXBOXController::X)
+  //     .WhileHeld(new Shoot(&shoot));
+
+  frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

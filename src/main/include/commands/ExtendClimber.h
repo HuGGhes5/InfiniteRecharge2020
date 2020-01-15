@@ -10,7 +10,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/ClimbMech.h"
+#include "subsystems/Climber.h"
 
 /**
  * An example command.
@@ -22,16 +22,12 @@
 class ExtendClimber
     : public frc2::CommandHelper<frc2::CommandBase, ExtendClimber> {
   public:
-    explicit ExtendClimber(ClimbMech* subsystem);
+    explicit ExtendClimber(Climber* subsystem);
 
     void Initialize() override;
-
-    void Execute() override;
-
-    bool IsFinished() override;
 
     void End(bool interrupted) override;
 
   private:
-    ClimbMech* climb_motor; 
+    Climber* climb; 
 };
