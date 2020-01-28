@@ -9,9 +9,9 @@
 
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include <frc/smartdashboard/SmartDashboard.h>
 
-#include "subsystems/Shooter.h"
+#include "Constants.h"
+#include "subsystems/Drivetrain.h"
 #include "subsystems/Limelight.h"
 
 /**
@@ -21,14 +21,20 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class LogDataToDashboard
-    : public frc2::CommandHelper<frc2::CommandBase, LogDataToDashboard> {
-  public:
-    explicit LogDataToDashboard(Shooter* subsystem, Limelight* subsystem2);
+class AlignCrossHair
+    : public frc2::CommandHelper<frc2::CommandBase, AlignCrossHair> {
+ public:
+  AlignCrossHair(Drivetrain* subsystem1, Limelight* subsystem2);
 
-    void Execute() override;
+  void Initialize() override;
+
+  void Execute() override;
+
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
 
   private:
-    Shooter* shoot;
+    Drivetrain* drive;
     Limelight* light;
 };

@@ -11,15 +11,18 @@
 #include <frc2/command/Command.h>
 // #include <frc/smartdashboard/SendableChooser.h>
 
+#include "commands/AlignCrossHair.h"
 #include "commands/DefaultDrive.h"
 #include "commands/DriveDistance.h"
 #include "commands/ExtendClimber.h"
 #include "commands/HalfSpeedDrive.h"
+#include "commands/LogDataToDashboard.h"
 #include "commands/RetractClimber.h"
 #include "commands/Shoot.h"
 #include "Constants.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Climber.h"
+#include "subsystems/Limelight.h"
 #include "subsystems/Shooter.h"
 
 /**
@@ -42,6 +45,7 @@ class RobotContainer {
   Drivetrain drive;
   Climber climb;
   Shooter shoot;
+  Limelight light;
 
   // The autonomous routines
   DriveDistance simple_auto{ConAuto::AutoDriveDistanceInches,
@@ -53,4 +57,5 @@ class RobotContainer {
   frc::XboxController driver_controller{ConXBOXController::DRIVER_CONTROLLER_PORT};
 
   void ConfigureButtonBindings();
+
 };

@@ -12,8 +12,14 @@ HalfSpeedDrive::HalfSpeedDrive(Drivetrain* subsystem) : drive(subsystem){
 }
 
 // Called when the command is initially scheduled.
-void HalfSpeedDrive::Initialize() {drive->SetMaxOutput(0.5);}
+void HalfSpeedDrive::Initialize() {
+  double max_output = drive->GetMaxOutput()*0.5;
+  drive->SetMaxOutput(max_output);
+  }
 
 // Called once the command ends or is interrupted.
-void HalfSpeedDrive::End(bool interrupted) {drive->SetMaxOutput(1.0);}
+void HalfSpeedDrive::End(bool interrupted) {
+  double max_output = drive->GetMaxOutput()*2.0;
+  drive->SetMaxOutput(max_output);
+  }
 

@@ -10,6 +10,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
+#include "commands/AlignCrossHair.h"
 #include "commands/DefaultDrive.h"
 #include "commands/ExtendClimber.h"
 #include "commands/LogDataToDashboard.h"
@@ -39,9 +40,12 @@ RobotContainer::RobotContainer() {
 
 void RobotContainer::ConfigureButtonBindings() {
   // Configure your button bindings here
-
+  
   // Commence Half Speed driving when RB is pressed
   frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::RIGHT_BUMPER); }).WhenHeld(new HalfSpeedDrive(&drive));
+  frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::LEFT_BUMPER); }).WhenHeld(new HalfSpeedDrive(&drive));
+
+  frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::A); }).WhenPressed(new AlignCrossHair(&drive, &light));
   // frc2::JoystickButton(&driver_controller, ConXBOXController::RIGHT_BUMPER)
   //     .WhenHeld(new HalfSpeedDrive(&drive));
 
@@ -59,7 +63,7 @@ void RobotContainer::ConfigureButtonBindings() {
   // frc2::JoystickButton(&driverController, ConXBOXController::X)
   //     .WhileHeld(new Shoot(&shoot));
 
-  frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot));
+  frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot, &light));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

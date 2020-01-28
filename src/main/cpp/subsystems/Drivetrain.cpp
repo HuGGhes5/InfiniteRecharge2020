@@ -21,8 +21,13 @@ void Drivetrain::ArcadeDrive(double speed, double rot) {
     drive.ArcadeDrive(speed, DeadZoneCorrection(rot));
 }
 
-void Drivetrain::SetMaxOutput(double maxOutput) {
-    drive.SetMaxOutput(maxOutput);
+double Drivetrain::GetMaxOutput() {
+    return max_output; 
+}
+
+void Drivetrain::SetMaxOutput(double max_output) {
+    this->max_output = max_output;
+    drive.SetMaxOutput(max_output);
 }
 
 //This is autonomous code that needs to get updated to real things afterwards

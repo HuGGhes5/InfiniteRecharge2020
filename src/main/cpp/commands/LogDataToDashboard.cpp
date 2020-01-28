@@ -7,12 +7,19 @@
 
 #include "commands/LogDataToDashboard.h"
 
-LogDataToDashboard::LogDataToDashboard(Shooter* subsystem) : shoot{subsystem} {
+LogDataToDashboard::LogDataToDashboard(Shooter* subsystem1, Limelight* subsystem2) : shoot{subsystem1}, light{subsystem2} {
   // Use addRequirements() here to declare subsystem dependencies.
 }
 
 // Called repeatedly when this Command is scheduled to run
 void LogDataToDashboard::Execute() {
+    //shooter subsystem
     frc::SmartDashboard::PutNumber("Top Motor Speed", shoot->GetTopMotorSpeed());
     frc::SmartDashboard::PutNumber("Bottom Motor Speed", shoot->GetBottomMotorSpeed());
+
+    //limelight subsystem
+    frc::SmartDashboard::PutNumber("Found Target", light->GetValidTarget());
+    frc::SmartDashboard::PutNumber("Horizontal offset", light->GetHorizontalOffset());
+    frc::SmartDashboard::PutNumber("Vertical offset", light->GetVerticalOffset());
+    frc::SmartDashboard::PutNumber("Target Area", light->GetTargetArea());
 }

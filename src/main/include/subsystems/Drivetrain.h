@@ -31,7 +31,9 @@ class Drivetrain : public frc2::SubsystemBase {
    */
   void ArcadeDrive(double speed, double rot);
 
-  void SetMaxOutput(double speed);
+  double GetMaxOutput();
+
+  void SetMaxOutput(double max_output);
 
   double GetAverageEncoderDistance();
 
@@ -40,8 +42,10 @@ class Drivetrain : public frc2::SubsystemBase {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-
-    // Neo motor controllers
+  
+  double max_output = 1.0;
+  
+  // Neo motor controllers
   rev::CANSparkMax right{ConDrivetrain::RIGHT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
   rev::CANSparkMax left{ConDrivetrain::LEFT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
 
@@ -54,5 +58,6 @@ class Drivetrain : public frc2::SubsystemBase {
 
   // Dead zone correction for Xbox controllers
   double DeadZoneCorrection(double axis_value);
+
 
 };
