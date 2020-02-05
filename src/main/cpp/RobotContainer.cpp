@@ -25,6 +25,7 @@ RobotContainer::RobotContainer() {
   
   frc::SmartDashboard::PutNumber("Top Motor RPM", 0.0);
   frc::SmartDashboard::PutNumber("Bottom Motor RPM", 0.0);
+  frc::SmartDashboard::PutNumber("Feeder Speed", 0.0);
 
   // Configure the button bindings
   ConfigureButtonBindings();
@@ -45,7 +46,7 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::RIGHT_BUMPER); }).WhenHeld(new HalfSpeedDrive(&drive));
   frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::LEFT_BUMPER); }).WhenHeld(new HalfSpeedDrive(&drive));
 
-  frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::A); }).WhenPressed(new AlignCrossHair(&drive, &light));
+  //frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new AlignCrossHair(&drive, &light));
   // frc2::JoystickButton(&driver_controller, ConXBOXController::RIGHT_BUMPER)
   //     .WhenHeld(new HalfSpeedDrive(&drive));
 
@@ -59,7 +60,7 @@ void RobotContainer::ConfigureButtonBindings() {
   // frc2::JoystickButton(&driverController, ConXBOXController::B)
   //     .WhileHeld(new RetractClimber(&climb));
 
-  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::X); }).WhileHeld(new Shoot(&shoot));
+  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::X); }).WhileHeld(new Shoot(&shoot, &feed));
   // frc2::JoystickButton(&driverController, ConXBOXController::X)
   //     .WhileHeld(new Shoot(&shoot));
 

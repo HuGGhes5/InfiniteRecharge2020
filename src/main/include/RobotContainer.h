@@ -24,6 +24,7 @@
 #include "subsystems/Climber.h"
 #include "subsystems/Limelight.h"
 #include "subsystems/Shooter.h"
+#include "subsystems/Feeder.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -46,6 +47,7 @@ class RobotContainer {
   Climber climb;
   Shooter shoot;
   Limelight light;
+  Feeder feed;
 
   // The autonomous routines
   DriveDistance simple_auto{ConAuto::AutoDriveDistanceInches,

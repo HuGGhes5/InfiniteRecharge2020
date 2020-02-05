@@ -22,4 +22,7 @@ void LogDataToDashboard::Execute() {
     frc::SmartDashboard::PutNumber("Horizontal offset", light->GetHorizontalOffset());
     frc::SmartDashboard::PutNumber("Vertical offset", light->GetVerticalOffset());
     frc::SmartDashboard::PutNumber("Target Area", light->GetTargetArea());
+
+    frc::SmartDashboard::PutData("LimeLight", light);
+    frc::SmartDashboard::PutData("Shooter", shoot);    
 }
