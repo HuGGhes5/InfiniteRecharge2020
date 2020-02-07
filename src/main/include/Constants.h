@@ -40,9 +40,16 @@ namespace ConClimber {
 
 namespace ConDrivetrain {
     //Motors
-    constexpr int RIGHT_MOTOR = 4;
-    constexpr int LEFT_MOTOR = 5;
+    constexpr int RIGHT_MOTOR = 2;
+    constexpr int RIGHT_SLAVE_MOTOR = 4;
+
+    constexpr int LEFT_MOTOR = 3;
+    constexpr int LEFT_SLAVE_MOTOR = 5;
     
+    //Spark Max Settings
+    constexpr int RAMP_RATE = 0.100; //seconds
+    constexpr bool INVERSION = false; //
+    //Conversions
     constexpr double IN_2_ENCODER = (10.71*42)/(6*ConMath::PI); //encoder to motor 42 counts/rev, motor to shaft 10.71:1, 6in wheel
     constexpr double ENCODER_2_IN = 1/IN_2_ENCODER; 
 }
@@ -82,7 +89,7 @@ namespace ConNEO {
 namespace ConShooter {
     constexpr int DEAULT_SPEED = 4000; //RPM
     namespace Top {
-        constexpr int MOTOR = 6;
+        constexpr int MOTOR = 9;
         constexpr int WHEEL_SIZE = 4; //in inches
         constexpr double VELOCITY_FACTOR = 1; //(ConMath::PI*WHEEL_SIZE) * ConMath::METERS_2_INCH * ConMath::MINUTES_2_SECONDS; //(velocity) y [m/s] = PI*WHEEL_SIZE * m/in * 1/60 * x [RPM]
         //PID gains
@@ -92,7 +99,7 @@ namespace ConShooter {
         constexpr double FF = 1.7e-4;
     }
     namespace Bottom {
-        constexpr int MOTOR = 9;
+        constexpr int MOTOR = 12;
         constexpr int WHEEL_SIZE = 6; //in inches
         constexpr double VELOCITY_FACTOR = 1; //(ConMath::PI*WHEEL_SIZE) * ConMath::METERS_2_INCH * ConMath::MINUTES_2_SECONDS; //(velocity) y [m/s] = PI*WHEEL_SIZE * m/in * 1/60 * x [RPM]
         //PID gains

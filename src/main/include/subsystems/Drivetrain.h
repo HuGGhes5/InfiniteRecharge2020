@@ -47,11 +47,17 @@ class Drivetrain : public frc2::SubsystemBase {
   
   // Neo motor controllers
   rev::CANSparkMax right{ConDrivetrain::RIGHT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax right_slave{ConDrivetrain::RIGHT_SLAVE_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+
   rev::CANSparkMax left{ConDrivetrain::LEFT_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
+  rev::CANSparkMax left_slave{ConDrivetrain::LEFT_SLAVE_MOTOR, rev::CANSparkMax::MotorType::kBrushless};
 
   // Drive encoders
   rev::CANEncoder right_encoder = right.GetEncoder();
+  rev::CANEncoder right_slave_encoder = right_slave.GetEncoder();
+
   rev::CANEncoder left_encoder = left.GetEncoder();
+  rev::CANEncoder left_slave_encoder = left_slave.GetEncoder();
 
   // Robot Drive
   frc::DifferentialDrive drive{left, right};

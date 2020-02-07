@@ -8,7 +8,23 @@
 #include "Constants.h"
 #include "subsystems/Drivetrain.h"
 
-Drivetrain::Drivetrain() {}
+Drivetrain::Drivetrain() {
+  // Settings for Spark Max motor controllers should be done here, in code
+  // and not in the Spark Max Client Software
+  right.SetOpenLoopRampRate(ConDrivetrain::RAMP_RATE);
+  right_slave.SetOpenLoopRampRate(ConDrivetrain::RAMP_RATE);
+  left.SetOpenLoopRampRate(ConDrivetrain::RAMP_RATE);
+  left_slave.SetOpenLoopRampRate(ConDrivetrain::RAMP_RATE);
+
+  right.SetInverted(ConDrivetrain::INVERSION);
+  right_slave.SetInverted(ConDrivetrain::INVERSION);
+  left.SetInverted(ConDrivetrain::INVERSION);
+  left_slave.SetInverted(ConDrivetrain::INVERSION);
+
+  // Set additional motor controllers on drive train to follow
+  right_slave.Follow(right, false);
+  left_slave.Follow(left, false);
+}
 
 // This method will be called once per scheduler run
 void Drivetrain::Periodic() {}
@@ -33,7 +49,10 @@ void Drivetrain::SetMaxOutput(double max_output) {
 //This is autonomous code that needs to get updated to real things afterwards
 void Drivetrain::ResetEncoders() {
   left_encoder.SetPosition(0);
+  left_slave_encoder.SetPosition(0);
+
   right_encoder.SetPosition(0);
+  right_slave_encoder.SetPosition(0);
 }
 
 double Drivetrain::GetAverageEncoderDistance() {
