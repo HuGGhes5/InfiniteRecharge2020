@@ -24,6 +24,9 @@ Drivetrain::Drivetrain() {
   // Set additional motor controllers on drive train to follow
   right_slave.Follow(right, false);
   left_slave.Follow(left, false);
+
+  // NavX gyro
+  gyro = new AHRS(frc::SPI::Port::kMXP);
 }
 
 // This method will be called once per scheduler run
@@ -34,7 +37,7 @@ double Drivetrain::DeadZoneCorrection(double axis_value) {
 }
 
 void Drivetrain::ArcadeDrive(double speed, double rot) {
-    drive.ArcadeDrive(speed, DeadZoneCorrection(rot));
+    drive.ArcadeDrive(speed, DeadZoneCorrection(rot) * 2.0/3.0);
 }
 
 double Drivetrain::GetMaxOutput() {
@@ -57,4 +60,12 @@ void Drivetrain::ResetEncoders() {
 
 double Drivetrain::GetAverageEncoderDistance() {
   return (left_encoder.GetPosition() + right_encoder.GetPosition()) / 2.0;
+}
+
+double Drivetrain::GetGyroAngle(){
+  return 5.0; //gyro->GetAngle();
+}
+
+void Drivetrain::ResetGyro(){
+  //gyro->Reset;
 }

@@ -34,7 +34,7 @@ RobotContainer::RobotContainer() {
    drive.SetDefaultCommand(DefaultDrive(
        &drive,
        [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_TRIGGER_ID) - driver_controller.GetRawAxis(ConXBOXController::LEFT_TRIGGER_ID); },
-       [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_JOYSTICK_X); }));
+       [this] { return driver_controller.GetRawAxis(ConXBOXController::LEFT_JOYSTICK_X); }));
 
 
 }
@@ -49,22 +49,9 @@ void RobotContainer::ConfigureButtonBindings() {
   //frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new AlignCrossHair(&drive, &light));
   // frc2::JoystickButton(&driver_controller, ConXBOXController::RIGHT_BUMPER)
   //     .WhenHeld(new HalfSpeedDrive(&drive));
+  
 
-  // Extend Climber when 'A' button is held.
-  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::A); }).WhenHeld(new ExtendClimber(&climb));
-  // frc2::JoystickButton(&driverController, ConXBOXController::A)
-  //     .WhileHeld(new ExtendClimber(&climb));
-
-  // Retract Climber when 'B' button is held.
-  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::B); }).WhenHeld(new RetractClimber(&climb));
-  // frc2::JoystickButton(&driverController, ConXBOXController::B)
-  //     .WhileHeld(new RetractClimber(&climb));
-
-  frc2::Button([this] {return driver_controller.GetRawButton(ConXBOXController::X); }).WhileHeld(new Shoot(&shoot, &feed));
-  // frc2::JoystickButton(&driverController, ConXBOXController::X)
-  //     .WhileHeld(new Shoot(&shoot));
-
-  frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot, &light));
+  frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot, &light, &drive));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() {

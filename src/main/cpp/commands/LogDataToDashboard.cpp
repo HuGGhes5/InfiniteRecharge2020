@@ -7,7 +7,7 @@
 
 #include "commands/LogDataToDashboard.h"
 
-LogDataToDashboard::LogDataToDashboard(Shooter* subsystem1, Limelight* subsystem2) : shoot{subsystem1}, light{subsystem2} {
+LogDataToDashboard::LogDataToDashboard(Shooter* subsystem1, Limelight* subsystem2, Drivetrain* subsystem3) : shoot{subsystem1}, light{subsystem2}, drive{subsystem3} {
   // Use addRequirements() here to declare subsystem dependencies.
 }
 
@@ -23,6 +23,6 @@ void LogDataToDashboard::Execute() {
     frc::SmartDashboard::PutNumber("Vertical offset", light->GetVerticalOffset());
     frc::SmartDashboard::PutNumber("Target Area", light->GetTargetArea());
 
-    frc::SmartDashboard::PutData("LimeLight", light);
-    frc::SmartDashboard::PutData("Shooter", shoot);    
+    //drivetrain subsystem
+    //frc::SmartDashboard::PutNumber("Gyro Angle", drive->GetGyroAngle);
 }

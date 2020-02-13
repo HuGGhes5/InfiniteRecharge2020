@@ -35,7 +35,10 @@ namespace ConAuto {
 
 namespace ConClimber {
     //Motors
-    constexpr int CLIMB_MOTOR = 6;
+    constexpr int CLIMB_MOTOR = 1;
+     constexpr double ENCODER_2_INCHES = 3.75; // inches #35 Chain = .375 pitch x 10 tooth = 3.75 inches
+    constexpr double EXT_LIMIT = -31.0; // inches FIXME: Guesstimate in inches
+    constexpr double RET_LIMIT = 0.0; // Starting Configuration: fully retracted, Encoder=0
 }
 
 namespace ConDrivetrain {
@@ -89,7 +92,7 @@ namespace ConNEO {
 namespace ConShooter {
     constexpr int DEAULT_SPEED = 4000; //RPM
     namespace Top {
-        constexpr int MOTOR = 9;
+        constexpr int MOTOR = 6;
         constexpr int WHEEL_SIZE = 4; //in inches
         constexpr double VELOCITY_FACTOR = 1; //(ConMath::PI*WHEEL_SIZE) * ConMath::METERS_2_INCH * ConMath::MINUTES_2_SECONDS; //(velocity) y [m/s] = PI*WHEEL_SIZE * m/in * 1/60 * x [RPM]
         //PID gains
@@ -99,7 +102,7 @@ namespace ConShooter {
         constexpr double FF = 1.7e-4;
     }
     namespace Bottom {
-        constexpr int MOTOR = 12;
+        constexpr int MOTOR = 9;
         constexpr int WHEEL_SIZE = 6; //in inches
         constexpr double VELOCITY_FACTOR = 1; //(ConMath::PI*WHEEL_SIZE) * ConMath::METERS_2_INCH * ConMath::MINUTES_2_SECONDS; //(velocity) y [m/s] = PI*WHEEL_SIZE * m/in * 1/60 * x [RPM]
         //PID gains
@@ -112,8 +115,8 @@ namespace ConShooter {
 
 namespace ConFeeder {
     //motor IDs
-    constexpr int FEED_MOTOR = 1;
-    constexpr int HOPPER_MOTOR = 0;
+    constexpr int FEED_MOTOR = 7;
+    constexpr int HOPPER_MOTOR = 1;
 }
 
 namespace ConXBOXController {
@@ -140,5 +143,33 @@ namespace ConXBOXController {
     //Dead zone
     constexpr double DEAD_ZONE = 0.5; //approximate value
     //Driver controller Port
-    constexpr int DRIVER_CONTROLLER_PORT = 0;
+    constexpr int DRIVER_CONTROLLER_PORT = 1;
 }
+
+    namespace ConCoDriverController {
+        namespace Button{
+            constexpr int RED = 10;
+            constexpr int BLUE = 9;
+            constexpr int YELLOW = 4;
+            constexpr int GREEN = 2;
+        }
+
+        namespace Switch{
+            constexpr int RED = 7;
+            constexpr int BLUE = 8;
+            constexpr int YELLOW = 3;
+            constexpr int GREEN = 1;
+        }
+        namespace Dial{
+            constexpr int LEFT = 0;
+            constexpr int RIGHT = 4;
+        }
+
+        constexpr int SLIDER = 6;
+        
+        constexpr int RIGHT_STICK_Y = 7;
+        constexpr int RIGHT_STICK_X = 3;
+
+        constexpr int CODRIVER_CONTROLLER_PORT = 4;
+        
+    }

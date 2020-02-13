@@ -11,7 +11,6 @@
 
 Shoot::Shoot(Shooter* subsystem1, Feeder* subsystem2) : shoot{subsystem1}, feed{subsystem2} {
   // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements({subsystem1, subsystem2});
 }
 
 // Called when the command is initially scheduled.

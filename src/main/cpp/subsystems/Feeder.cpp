@@ -10,7 +10,7 @@
 Feeder::Feeder() {}
 
 // This method will be called once per scheduler run
-void Feeder::Periodic() {}
+void Feeder::Periodic() {feed_motor.SetInverted(true);}
 
 void Feeder::SetFeedSpeed(double speed) {feed_motor.Set(speed);}
 

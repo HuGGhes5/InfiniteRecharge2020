@@ -12,6 +12,7 @@
 #include <rev/CANSparkMax.h>
 
 #include "Constants.h"
+#include "AHRS.h"
 
 
 class Drivetrain : public frc2::SubsystemBase {
@@ -38,6 +39,10 @@ class Drivetrain : public frc2::SubsystemBase {
   double GetAverageEncoderDistance();
 
   void ResetEncoders();
+
+  double GetGyroAngle();
+
+  void ResetGyro();
   
  private:
   // It's desirable that everything possible under private except
@@ -65,5 +70,6 @@ class Drivetrain : public frc2::SubsystemBase {
   // Dead zone correction for Xbox controllers
   double DeadZoneCorrection(double axis_value);
 
+  AHRS *gyro;
 
 };

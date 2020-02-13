@@ -9,14 +9,14 @@
 
 Shooter::Shooter() {
     
-    // Invert
+    // Invert shooter motors correctly
     top_motor.SetInverted(false);
     bottom_motor.SetInverted(true);
     //Set velocity of shaft relative to velocity of wheel
     top_encoder.SetVelocityConversionFactor(ConShooter::Top::VELOCITY_FACTOR);
     bottom_encoder.SetVelocityConversionFactor(ConShooter::Bottom::VELOCITY_FACTOR);
 
-    //Set controller gains
+    //Set controller gains from constants
     top_velocity_PID.SetP(ConShooter::Top::P);
     top_velocity_PID.SetI(ConShooter::Top::I);
     top_velocity_PID.SetD(ConShooter::Top::D);

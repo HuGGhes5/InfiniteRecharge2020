@@ -19,6 +19,7 @@
 #include "commands/LogDataToDashboard.h"
 #include "commands/RetractClimber.h"
 #include "commands/Shoot.h"
+#include "commands/Jumble.h"
 #include "Constants.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Climber.h"

@@ -13,13 +13,36 @@ Climber::Climber() {}
 void Climber::Periodic() {}
 
 void Climber::ExtendClimber() {
-    climb_motor.Set(0.3);
+    if (climber_position > ConClimber::EXT_LIMIT) { // Extending is NEGATIVE/DECREASING on the encoder
+    SetClimberSpeed(0.5);
+  }
+  else {
+    StopClimber();
+  }
 }
 
 void Climber::RetractClimber() {
-    climb_motor.Set(-1);
+    if (climber_position < ConClimber::RET_LIMIT) { // Retracting is POSITIVE/INCREASING on the encoder
+    SetClimberSpeed(0.5);
+  }
+  else {
+    StopClimber();
+  }
 }
 
 void Climber::StopClimber() {
     climb_motor.Set(0.0);
 }
+
+void Climber::SetClimberSpeed(double speed){
+    climb_motor.Set(speed);
+}
+
+void Climber::ResetEncoder(){
+  climb_duty_encoder.Reset();
+}
+
+// // This method will be called once per scheduler run
+// void Climber::Periodic() {
+//   climber_position = climb_duty_encoder.GetDistance();
+// }

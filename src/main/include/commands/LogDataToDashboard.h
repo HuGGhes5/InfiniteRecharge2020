@@ -13,6 +13,7 @@
 
 #include "subsystems/Shooter.h"
 #include "subsystems/Limelight.h"
+#include "subsystems/Drivetrain.h"
 
 /**
  * An example command.
@@ -24,11 +25,12 @@
 class LogDataToDashboard
     : public frc2::CommandHelper<frc2::CommandBase, LogDataToDashboard> {
   public:
-    explicit LogDataToDashboard(Shooter* subsystem, Limelight* subsystem2);
+    explicit LogDataToDashboard(Shooter* subsystem1, Limelight* subsystem2, Drivetrain* subsystem3);
 
     void Execute() override;
 
   private:
     Shooter* shoot;
     Limelight* light;
+    Drivetrain* drive;
 };
