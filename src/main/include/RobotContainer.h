@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc/XboxController.h>
+#include <frc/Joystick.h>
 #include <frc2/command/Command.h>
 // #include <frc/smartdashboard/SendableChooser.h>
 
@@ -58,6 +59,8 @@ class RobotContainer {
 
   // The driver's controller
   frc::XboxController driver_controller{ConXBOXController::DRIVER_CONTROLLER_PORT};
+  
+  frc::Joystick codriver_controller{ConCoDriverController::CODRIVER_CONTROLLER_PORT};
 
   void ConfigureButtonBindings();
 

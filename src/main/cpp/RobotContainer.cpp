@@ -49,8 +49,9 @@ void RobotContainer::ConfigureButtonBindings() {
   //frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new AlignCrossHair(&drive, &light));
   // frc2::JoystickButton(&driver_controller, ConXBOXController::RIGHT_BUMPER)
   //     .WhenHeld(new HalfSpeedDrive(&drive));
-  
 
+  frc2::Button([this] { return codriver_controller.GetRawButton(ConCoDriverController::Switch::GREEN); }).WhenHeld(new Shoot(&shoot, &feed));
+  
   frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot, &light, &drive));
 }
 

@@ -148,17 +148,17 @@ namespace ConXBOXController {
 
     namespace ConCoDriverController {
         namespace Button{
-            constexpr int RED = 10;
-            constexpr int BLUE = 9;
-            constexpr int YELLOW = 4;
-            constexpr int GREEN = 2;
+            constexpr int RED = 11;
+            constexpr int BLUE = 10;
+            constexpr int YELLOW = 5;
+            constexpr int GREEN = 3;
         }
 
         namespace Switch{
-            constexpr int RED = 7;
-            constexpr int BLUE = 8;
-            constexpr int YELLOW = 3;
-            constexpr int GREEN = 1;
+            constexpr int RED = 8;
+            constexpr int BLUE = 9;
+            constexpr int YELLOW = 4;
+            constexpr int GREEN = 2;
         }
         namespace Dial{
             constexpr int LEFT = 0;
