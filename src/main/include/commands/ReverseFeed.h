@@ -10,7 +10,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/Feeder.h"
+#include "subsystems/Shooter.h"
 
 /**
  * An example command.
@@ -19,15 +19,15 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class Jumble
-    : public frc2::CommandHelper<frc2::CommandBase, Jumble> {
+class ReverseFeed
+    : public frc2::CommandHelper<frc2::CommandBase, ReverseFeed> {
  public:
-  explicit Jumble(Feeder* subsystem);
+  explicit ReverseFeed(Shooter* subsystem);
 
   void Execute() override;
 
   void End(bool interrupted) override;
 
   private:
-  Feeder* feed;
+    Shooter* shoot;
 };

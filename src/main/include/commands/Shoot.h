@@ -11,8 +11,6 @@
 #include <frc2/command/CommandHelper.h>
 
 #include "subsystems/Shooter.h"
-#include "subsystems/Feeder.h"
-
 /**
  * An example command.
  *
@@ -23,7 +21,7 @@
 class Shoot
   : public frc2::CommandHelper<frc2::CommandBase, Shoot> {
   public:
-    explicit Shoot(Shooter* subsystem1, Feeder* subsystem2);
+    explicit Shoot(Shooter* subsystem1);
 
     void Execute() override;
 
@@ -31,5 +29,4 @@ class Shoot
 
   private:
     Shooter* shoot;
-    Feeder* feed;
 };

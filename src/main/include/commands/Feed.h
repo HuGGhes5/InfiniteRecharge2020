@@ -10,9 +10,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "Constants.h"
-#include "subsystems/Drivetrain.h"
-#include "subsystems/Limelight.h"
+#include "subsystems/Shooter.h"
 
 /**
  * An example command.
@@ -21,21 +19,15 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class AlignCrossHair
-    : public frc2::CommandHelper<frc2::CommandBase, AlignCrossHair> {
+class Feed
+    : public frc2::CommandHelper<frc2::CommandBase, Feed> {
  public:
-  AlignCrossHair(Drivetrain* subsystem1, Limelight* subsystem2);
-
-  void Initialize() override;
+  explicit Feed(Shooter* subsystem);
 
   void Execute() override;
 
   void End(bool interrupted) override;
 
-  bool IsFinished() override;
-
   private:
-    Drivetrain* drive;
-    Limelight* light;
-    //frc2::PIDController pid(1.0, 0.0, 0.0);
+    Shooter* shoot;
 };

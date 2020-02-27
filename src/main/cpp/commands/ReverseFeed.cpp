@@ -4,16 +4,18 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
+#include <frc/smartdashboard/SmartDashboard.h>
 
-#include "commands/ExtendClimber.h"
-#include "subsystems/Climber.h"
+#include "commands/ReverseFeed.h"
 
-ExtendClimber::ExtendClimber(Climber* subsystem) : climb{subsystem} {
+ReverseFeed::ReverseFeed(Shooter* subsystem) : shoot{subsystem} {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({subsystem});
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ExtendClimber::Initialize() {climb->ExtendClimber();}
+void ReverseFeed::Execute() {shoot->SetHopperSpeed(- frc::SmartDashboard::GetNumber("Hopper Speed", 0.0));}
 
-void ExtendClimber::End(bool interrupted) {climb->StopClimber();}
+// Called once the command ends or is interrupted.
+void ReverseFeed::End(bool interrupted) {shoot->SetHopperSpeed(0.0);}
+

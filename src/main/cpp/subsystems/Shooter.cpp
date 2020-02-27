@@ -28,6 +28,23 @@ Shooter::Shooter() {
     bottom_velocity_PID.SetD(ConShooter::Bottom::D);
     bottom_velocity_PID.SetFF(ConShooter::Bottom::FF);
     bottom_velocity_PID.SetOutputRange(0,1);
+
+    //Kicker motor PID code
+    kicker_motor.SetInverted(true);
+    kicker_motor.SetNeutralMode(ctre::phoenix::motorcontrol::NeutralMode::Coast);
+    train_motor.SetNeutralMode(ctre::phoenix::motorcontrol::NeutralMode::Brake);
+    hopper_motor.SetNeutralMode(ctre::phoenix::motorcontrol::NeutralMode::Coast);
+    //first choose sensor
+    kicker_motor.ConfigSelectedFeedbackSensor(ctre::phoenix::motorcontrol::FeedbackDevice::CTRE_MagEncoder_Absolute, 0, 30);
+    
+    // set the peak and nominal outputs
+    kicker_motor.ConfigNominalOutputForward(0, 30);
+    kicker_motor.ConfigNominalOutputReverse(0, 30);
+    kicker_motor.ConfigPeakOutputForward(1, 30);
+    kicker_motor.ConfigPeakOutputReverse(-1, 30);
+    //closed loop gains in slot 0
+    kicker_motor.Config_kP(0, 1.0, 30);
+    kicker_motor.Config_kD(0, 250.0, 30);
 }
 
 // This method will be called once per scheduler run
@@ -49,3 +66,10 @@ double Shooter::GetBottomMotorSpeed() {
 double Shooter::GetTopMotorSpeed() {
     return top_encoder.GetVelocity();
 }
+
+//Feeder system
+void Shooter::SetKickerSpeed(double velocity) {/* feed_motor.Set(speed); */ kicker_motor.Set(ControlMode::Velocity, velocity);}
+
+void Shooter::SetHopperSpeed(double speed) {hopper_motor.Set(speed);}
+
+void Shooter::SetTrainSpeed(double speed) {train_motor.Set(speed);}

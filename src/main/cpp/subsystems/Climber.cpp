@@ -9,40 +9,39 @@
 
 Climber::Climber() {}
 
-// This method will be called once per scheduler run
-void Climber::Periodic() {}
-
-void Climber::ExtendClimber() {
-    if (climber_position > ConClimber::EXT_LIMIT) { // Extending is NEGATIVE/DECREASING on the encoder
-    SetClimberSpeed(0.5);
-  }
-  else {
-    StopClimber();
-  }
-}
-
-void Climber::RetractClimber() {
-    if (climber_position < ConClimber::RET_LIMIT) { // Retracting is POSITIVE/INCREASING on the encoder
-    SetClimberSpeed(0.5);
-  }
-  else {
-    StopClimber();
-  }
-}
-
 void Climber::StopClimber() {
     climb_motor.Set(0.0);
 }
 
 void Climber::SetClimberSpeed(double speed){
-    climb_motor.Set(speed);
+  if (((climber_position < ConClimber::RET_LIMIT) && speed < 0.0) || ((climber_position > ConClimber::EXT_LIMIT) && speed > 0.0))
+    {
+      this->StopClimber();
+    }
+  else if (climb_enable) 
+    {
+      climb_motor.Set(speed);
+    }
+}
+
+void Climber::Unlock(){
+  climb_enable = true;
+  climber_lock.Set(frc::DoubleSolenoid::kReverse);
+}
+
+void Climber::Lock(){
+  climb_enable = false;
+  this->StopClimber();
+  climb_motor.Set(0.0);
+  climber_lock.Set(frc::DoubleSolenoid::kForward);
+
 }
 
 void Climber::ResetEncoder(){
   climb_duty_encoder.Reset();
 }
 
-// // This method will be called once per scheduler run
-// void Climber::Periodic() {
-//   climber_position = climb_duty_encoder.GetDistance();
-// }
+// This method will be called once per scheduler run
+void Climber::Periodic() {
+  climber_position = climb_duty_encoder.GetDistance();
+}

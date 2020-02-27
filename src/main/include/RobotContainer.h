@@ -13,20 +13,21 @@
 // #include <frc/smartdashboard/SendableChooser.h>
 
 #include "commands/AlignCrossHair.h"
+#include "commands/ClimbManual.h"
 #include "commands/DefaultDrive.h"
 #include "commands/DriveDistance.h"
-#include "commands/ExtendClimber.h"
 #include "commands/HalfSpeedDrive.h"
 #include "commands/LogDataToDashboard.h"
-#include "commands/RetractClimber.h"
 #include "commands/Shoot.h"
-#include "commands/Jumble.h"
+#include "commands/Feed.h"
+#include "commands/ReverseFeed.h"
+#include "commands/MoveTrain.h"
 #include "Constants.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Climber.h"
 #include "subsystems/Limelight.h"
 #include "subsystems/Shooter.h"
-#include "subsystems/Feeder.h"
+
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -49,7 +50,6 @@ class RobotContainer {
   Climber climb;
   Shooter shoot;
   Limelight light;
-  Feeder feed;
 
   // The autonomous routines
   DriveDistance simple_auto{ConAuto::AutoDriveDistanceInches,

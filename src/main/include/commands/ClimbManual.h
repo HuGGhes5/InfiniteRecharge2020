@@ -19,15 +19,21 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class ExtendClimber
-    : public frc2::CommandHelper<frc2::CommandBase, ExtendClimber> {
-  public:
-    explicit ExtendClimber(Climber* subsystem);
+class ClimbManual
+    : public frc2::CommandHelper<frc2::CommandBase, ClimbManual> {
+ public:
+  explicit ClimbManual(Climber* subsystem, frc::Joystick* controller);
 
-    void Initialize() override;
+  void Initialize() override;
 
-    void End(bool interrupted) override;
+  void Execute() override;
 
-  private:
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
+
+
+ private:
     Climber* climb; 
+    frc::Joystick* codriver_controller;
 };

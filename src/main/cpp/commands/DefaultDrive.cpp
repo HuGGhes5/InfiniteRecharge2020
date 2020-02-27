@@ -9,7 +9,7 @@
 
 DefaultDrive::DefaultDrive(Drivetrain* subsystem, std::function<double()> forwardSpeed, std::function<double()> rotationSpeed)
               : drive{subsystem}, speed{forwardSpeed}, rotation{rotationSpeed} {
-  AddRequirements({subsystem});
+  AddRequirements({subsystem}); //see if this changes ability to run align
 }
 
 // Called repeatedly when this Command is scheduled to run

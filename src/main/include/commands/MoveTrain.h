@@ -10,7 +10,7 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
-#include "subsystems/Climber.h"
+#include "subsystems/Shooter.h"
 
 /**
  * An example command.
@@ -19,15 +19,16 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
-class RetractClimber
-    : public frc2::CommandHelper<frc2::CommandBase, RetractClimber> {
-  public:
-    explicit RetractClimber(Climber* subsystem);
+class MoveTrain
+    : public frc2::CommandHelper<frc2::CommandBase, MoveTrain> {
+ public:
+  explicit MoveTrain(Shooter* subsystem);
 
-    void Initialize() override;
+  void Execute() override;
 
-    void End(bool interrupted) override;
+  void End(bool interrupted) override;
 
   private:
-    Climber* climb; 
+    Shooter* shoot;
 };
+

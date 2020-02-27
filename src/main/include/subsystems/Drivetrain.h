@@ -43,7 +43,7 @@ class Drivetrain : public frc2::SubsystemBase {
   double GetGyroAngle();
 
   void ResetGyro();
-  
+
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities

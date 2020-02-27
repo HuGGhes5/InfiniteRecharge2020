@@ -48,7 +48,7 @@ void Drivetrain::SetMaxOutput(double max_output) {
     this->max_output = max_output;
     drive.SetMaxOutput(max_output);
 }
-
+    
 //This is autonomous code that needs to get updated to real things afterwards
 void Drivetrain::ResetEncoders() {
   left_encoder.SetPosition(0);
@@ -63,9 +63,9 @@ double Drivetrain::GetAverageEncoderDistance() {
 }
 
 double Drivetrain::GetGyroAngle(){
-  return 5.0; //gyro->GetAngle();
+  return gyro->GetAngle();
 }
 
 void Drivetrain::ResetGyro(){
-  //gyro->Reset;
+  gyro->Reset();
 }

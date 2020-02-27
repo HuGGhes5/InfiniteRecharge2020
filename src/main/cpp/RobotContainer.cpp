@@ -11,12 +11,14 @@
 
 #include "Constants.h"
 #include "commands/AlignCrossHair.h"
+#include "commands/ClimbManual.h"
 #include "commands/DefaultDrive.h"
-#include "commands/ExtendClimber.h"
+#include "commands/Feed.h"
+#include "commands/ReverseFeed.h"
 #include "commands/LogDataToDashboard.h"
 #include "commands/HalfSpeedDrive.h"
-#include "commands/RetractClimber.h"
 #include "commands/Shoot.h"
+#include "commands/MoveTrain.h"
 
 #include "RobotContainer.h"
 
@@ -25,17 +27,19 @@ RobotContainer::RobotContainer() {
   
   frc::SmartDashboard::PutNumber("Top Motor RPM", 0.0);
   frc::SmartDashboard::PutNumber("Bottom Motor RPM", 0.0);
-  frc::SmartDashboard::PutNumber("Feeder Speed", 0.0);
+  frc::SmartDashboard::PutNumber("Kicker RPM", 0.0);
+  frc::SmartDashboard::PutNumber("Hopper Speed", 0.0);
+  frc::SmartDashboard::PutNumber("Train Speed", 0.0);
 
   // Configure the button bindings
   ConfigureButtonBindings();
 
   // Set up default drive command
-   drive.SetDefaultCommand(DefaultDrive(
+  drive.SetDefaultCommand(DefaultDrive(
        &drive,
        [this] { return driver_controller.GetRawAxis(ConXBOXController::RIGHT_TRIGGER_ID) - driver_controller.GetRawAxis(ConXBOXController::LEFT_TRIGGER_ID); },
        [this] { return driver_controller.GetRawAxis(ConXBOXController::LEFT_JOYSTICK_X); }));
-
+    
 
 }
 
@@ -46,11 +50,16 @@ void RobotContainer::ConfigureButtonBindings() {
   frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::RIGHT_BUMPER); }).WhenHeld(new HalfSpeedDrive(&drive));
   frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::LEFT_BUMPER); }).WhenHeld(new HalfSpeedDrive(&drive));
 
-  //frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new AlignCrossHair(&drive, &light));
+  frc2::Button([this] { return driver_controller.GetRawButton(ConXBOXController::Y); }).WhenPressed(new AlignCrossHair(&drive, &light));
   // frc2::JoystickButton(&driver_controller, ConXBOXController::RIGHT_BUMPER)
   //     .WhenHeld(new HalfSpeedDrive(&drive));
 
-  frc2::Button([this] { return codriver_controller.GetRawButton(ConCoDriverController::Switch::GREEN); }).WhenHeld(new Shoot(&shoot, &feed));
+  frc2::Button([this] { return codriver_controller.GetRawButton(ConCoDriverController::Switch::RED); }).WhenHeld(new Shoot(&shoot));
+  frc2::Button([this] {return codriver_controller.GetRawButton(ConCoDriverController::Button::RED); }).WhenHeld(new Feed(&shoot));
+  frc2::Button([this] {return codriver_controller.GetRawButton(ConCoDriverController::Button::BLUE); }).WhenHeld(new ReverseFeed(&shoot));
+  frc2::Button([this] {return codriver_controller.GetRawButton(ConCoDriverController::Button::YELLOW); }).WhenHeld(new MoveTrain(&shoot));
+  //Climb command
+  frc2::Button([this] {return codriver_controller.GetRawButton(ConCoDriverController::Button::WHITE); }).WhenHeld(new ClimbManual(&climb, &codriver_controller));
   
   frc2::Button([this] {return true;}).WhileHeld(new LogDataToDashboard(&shoot, &light, &drive));
 }

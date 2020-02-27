@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include <ctre/Phoenix.h>
 #include <rev/CANPIDController.h>
 #include <rev/CANSparkMax.h>
 
@@ -30,6 +31,12 @@ class Shooter : public frc2::SubsystemBase {
 
   double GetTopMotorSpeed();
 
+  void SetKickerSpeed(double velocity);
+
+  void SetHopperSpeed(double speed);
+
+  void SetTrainSpeed(double speed);
+
  private:
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
@@ -45,5 +52,11 @@ class Shooter : public frc2::SubsystemBase {
   //PID controller
   rev::CANPIDController top_velocity_PID = top_motor.GetPIDController();
   rev::CANPIDController bottom_velocity_PID = bottom_motor.GetPIDController();
+
+  //Feed system
+  WPI_TalonSRX kicker_motor{ConFeeder::KICKER_MOTOR};
+  WPI_TalonSRX hopper_motor{ConFeeder::HOPPER_MOTOR};
+
+  WPI_TalonSRX train_motor{2};
 
 };

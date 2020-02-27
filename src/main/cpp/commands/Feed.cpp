@@ -5,15 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/RetractClimber.h"
-#include "subsystems/Climber.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
-RetractClimber::RetractClimber(Climber* subsystem) : climb{subsystem} {
+#include "commands/Feed.h"
+
+Feed::Feed(Shooter* subsystem) : shoot{subsystem} {
   // Use addRequirements() here to declare subsystem dependencies.
   AddRequirements({subsystem});
 }
 
 // Called repeatedly when this Command is scheduled to run
-void RetractClimber::Initialize() {climb->RetractClimber();}
+void Feed::Execute() {shoot->SetHopperSpeed(frc::SmartDashboard::GetNumber("Hopper Speed", 0.0));}
 
-void RetractClimber::End(bool interrupted) {climb->StopClimber();}
+// Called once the command ends or is interrupted.
+void Feed::End(bool interrupted) {shoot->SetHopperSpeed(0.0);}
+

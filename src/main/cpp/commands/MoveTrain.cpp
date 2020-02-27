@@ -5,16 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/Jumble.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
-Jumble::Jumble(Feeder* subsystem) : feed{subsystem} {
+#include "commands/MoveTrain.h"
+
+MoveTrain::MoveTrain(Shooter* subsystem) : shoot{subsystem} {
   // Use addRequirements() here to declare subsystem dependencies.
-  AddRequirements({subsystem});
+  //AddRequirements({subsystem});
 }
 
 // Called repeatedly when this Command is scheduled to run
-void Jumble::Execute() {feed->SetHopperSpeed(2.0/3.0);}
+void MoveTrain::Execute() {shoot->SetTrainSpeed(frc::SmartDashboard::GetNumber("Train Speed", 0.0));}
 
 // Called once the command ends or is interrupted.
-void Jumble::End(bool interrupted) {feed->SetHopperSpeed(0.0);}
+void MoveTrain::End(bool interrupted) {shoot->SetTrainSpeed(0.0);}
 

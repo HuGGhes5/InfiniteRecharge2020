@@ -9,7 +9,7 @@
 
 #include "commands/Shoot.h"
 
-Shoot::Shoot(Shooter* subsystem1, Feeder* subsystem2) : shoot{subsystem1}, feed{subsystem2} {
+Shoot::Shoot(Shooter* subsystem1) : shoot{subsystem1}{
   // Use addRequirements() here to declare subsystem dependencies.
 }
 
@@ -17,7 +17,7 @@ Shoot::Shoot(Shooter* subsystem1, Feeder* subsystem2) : shoot{subsystem1}, feed{
 void Shoot::Execute() {
   shoot->SetBottomMotorSpeed(frc::SmartDashboard::GetNumber("Bottom Motor RPM", 0.0));
   shoot->SetTopMotorSpeed(frc::SmartDashboard::GetNumber("Top Motor RPM", 0.0));
-  feed->SetFeedSpeed(frc::SmartDashboard::GetNumber("Feeder Speed", 0.0));
+  shoot->SetKickerSpeed(frc::SmartDashboard::GetNumber("Kicker RPM", 0.0));
 }
 
 // Returns true when the command should end.
@@ -25,5 +25,5 @@ void Shoot::Execute() {
 void Shoot::End(bool interupted) {
   shoot->SetBottomMotorSpeed(0.0);
   shoot->SetTopMotorSpeed(0.0);
-  feed->SetFeedSpeed(0.0);
+  shoot->SetKickerSpeed(0.0);
 }
